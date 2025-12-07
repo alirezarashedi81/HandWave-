@@ -18,6 +18,7 @@ A real-time hand gesture recognition system that allows you to control your comp
 ## Requirements
 
 ```
+Python 3.10
 opencv-python
 mediapipe
 pygame
@@ -34,8 +35,9 @@ cd hand-gesture-mouse-control
 
 2. Install the required dependencies:
 ```bash
-Python 3.10
+
 pip install -r requirements.txt
+
 ```
 
 ## Usage
