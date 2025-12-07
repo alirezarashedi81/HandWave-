@@ -42,4 +42,101 @@ https://www.python.org/downloads/release/python-3100/
 ---
 
 ## 2. **Create Virtual Environment**
+python3.10 -m venv HandWave
 
+
+Activate it:
+
+### **Windows**
+
+HandWave\Scripts\activate
+
+
+---
+
+## 3. **Install Dependencies**
+
+Create a `requirements.txt` file:
+
+
+
+opencv-python==4.9.0.80
+mediapipe==0.10.9
+pygame==2.5.2
+numpy==1.26.4
+
+
+Then install:
+
+
+
+pip install -r requirements.txt
+
+
+---
+
+## ▶️ Running the Program
+
+Once inside the environment:
+
+
+
+python handwave.py
+
+
+Exit the program by pressing:
+
+
+
+q
+
+
+---
+
+## 📁 Project Structure
+
+
+
+HandWave/
+│
+├── handwave.py # Main application code
+├── requirements.txt # Project dependencies
+└── README.md # Documentation
+
+
+---
+
+## 💡 How It Works
+
+### 🔍 1. **Hand Tracking**
+MediaPipe detects:
+- 21 landmarks per hand  
+- Left / right handedness  
+- Thumb, index, middle, pinky tip coordinates  
+
+### 🧮 2. **Smoothing**
+Every frame uses **Exponential Moving Average (EMA)**:
+```python
+smoothed = alpha * current + (1 - alpha) * previous
+
+🌀 3. Dead-Zone
+
+Tiny movements around the previous point are ignored:
+
+distance < DEAD_ZONE_THRESHOLD
+
+
+Prevents shaking.
+
+🚀 4. Velocity Mapping
+
+Frame-space → Screen-space scaling + nonlinear motion:
+
+vx = (dx ** gamma) * gain
+
+🖱 5. Windows Cursor Control
+
+Uses Win32 API:
+
+SetCursorPos(x, y)
+mouse_event(...)
